@@ -6,6 +6,7 @@ import 'package:food_app_chal1/constants/app_icons.dart';
 import 'package:food_app_chal1/constants/app_images.dart';
 import 'package:food_app_chal1/constants/app_sizes.dart';
 import 'package:food_app_chal1/widgets/app_button.dart';
+import 'package:food_app_chal1/widgets/outlined_icon_button.dart';
 import 'package:food_app_chal1/widgets/xspace.dart';
 
 class FoodDetail extends StatelessWidget {
@@ -28,7 +29,7 @@ class FoodDetail extends StatelessWidget {
             child: Stack(children: [
               Align(
                 alignment: const Alignment(-1, -.8),
-                child: roundedIconButton(
+                child: OutlinedIconButton(
                     child: SvgPicture.asset(
                   AppIcons.arrowLeft,
                   color: Colors.white,
@@ -77,13 +78,13 @@ class FoodDetail extends StatelessWidget {
                       ],
                     ),
                   ),
-                  roundedIconButton(
+                  OutlinedIconButton(
+                      borderColor: Colors.black26,
+                      ratio: size.CONTENT_SPACE * 2.9,
                       child: const Icon(
                         Icons.favorite,
                         color: Colors.red,
-                      ),
-                      borderColor: Colors.black26,
-                      ratio: size.CONTENT_SPACE * 2.9)
+                      ))
                 ],
               ),
               Padding(
@@ -173,13 +174,13 @@ class FoodDetail extends StatelessWidget {
                               .copyWith(fontWeight: FontWeight.w900)),
                       Row(
                         children: [
-                          roundedIconButton(
+                          OutlinedIconButton(
+                              borderColor: AppColors.greenColor,
+                              ratio: size.CONTENT_SPACE * 1.9,
                               child: Icon(
                                 Icons.remove_rounded,
                                 color: AppColors.greenColor,
-                              ),
-                              borderColor: AppColors.greenColor,
-                              ratio: size.CONTENT_SPACE * 1.9),
+                              )),
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: size.CONTENT_SPACE / 2),
@@ -187,13 +188,13 @@ class FoodDetail extends StatelessWidget {
                                 style: theme.textTheme.titleMedium!
                                     .copyWith(fontWeight: FontWeight.w900)),
                           ),
-                          roundedIconButton(
+                          OutlinedIconButton(
+                              borderColor: AppColors.greenColor,
+                              ratio: size.CONTENT_SPACE * 1.9,
                               child: Icon(
                                 Icons.add_rounded,
                                 color: AppColors.greenColor,
-                              ),
-                              borderColor: AppColors.greenColor,
-                              ratio: size.CONTENT_SPACE * 1.9)
+                              ))
                         ],
                       )
                     ],
@@ -232,23 +233,5 @@ class FoodDetail extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Widget roundedIconButton(
-      {required Widget child, Color? borderColor, double? ratio}) {
-    return Builder(builder: (context) {
-      AppSizes size = AppSizes(context);
-      double r = ratio ?? size.CONTENT_SPACE * 2.5;
-      return Container(
-        height: r,
-        width: r,
-        padding: EdgeInsets.all(size.CONTENT_SPACE / 2),
-        decoration: BoxDecoration(
-            color: Colors.white24,
-            border: Border.all(color: borderColor ?? Colors.white, width: 1.5),
-            shape: BoxShape.circle),
-        child: FittedBox(child: child),
-      );
-    });
   }
 }
