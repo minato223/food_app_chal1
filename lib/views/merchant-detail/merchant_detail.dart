@@ -4,6 +4,7 @@ import 'package:food_app_chal1/constants/app_colors.dart';
 import 'package:food_app_chal1/constants/app_icons.dart';
 import 'package:food_app_chal1/constants/app_images.dart';
 import 'package:food_app_chal1/constants/app_sizes.dart';
+import 'package:food_app_chal1/views/common/custom_app_bar.dart';
 import 'package:food_app_chal1/widgets/app_button.dart';
 import 'package:food_app_chal1/widgets/app_icon.dart';
 import 'package:food_app_chal1/widgets/outlined_icon_button.dart';
@@ -26,47 +27,31 @@ class MerchantDetail extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: size.CONTENT_SPACE),
-                  height: kToolbarHeight,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      OutlinedIconButton(
-                          borderColor: AppColors.textColor,
-                          child: SvgPicture.asset(
-                            AppIcons.arrowLeft,
-                            color: Colors.black54,
-                          )),
-                      XSpace(size.CONTENT_SPACE * .7).x,
-                      Expanded(
-                          child: Padding(
-                        padding:
-                            EdgeInsets.only(bottom: size.CONTENT_SPACE * .3),
-                        child: Text('Detail Merchant',
-                            style: theme.textTheme.titleLarge!
-                                .copyWith(fontWeight: FontWeight.w900)),
+            CustomAppBar(
+              leading: OutlinedIconButton(
+                  borderColor: AppColors.textColor,
+                  child: SvgPicture.asset(
+                    AppIcons.arrowLeft,
+                    color: Colors.black54,
+                  )),
+              title: "Detail Merchant",
+              actions: Row(
+                children: [
+                  OutlinedIconButton(
+                      borderColor: AppColors.textColor,
+                      child: SvgPicture.asset(
+                        AppIcons.search,
+                        color: Colors.black54,
                       )),
-                      OutlinedIconButton(
-                          borderColor: AppColors.textColor,
-                          child: SvgPicture.asset(
-                            AppIcons.search,
-                            color: Colors.black54,
-                          )),
-                      XSpace(size.CONTENT_SPACE / 2).x,
-                      OutlinedIconButton(
-                          borderColor: AppColors.textColor,
-                          child: SvgPicture.asset(
-                            AppIcons.share,
-                            color: Colors.black54,
-                          ))
-                    ],
-                  ),
-                ),
-                XSpace(size.CONTENT_SPACE).y
-              ],
+                  XSpace(size.CONTENT_SPACE / 2).x,
+                  OutlinedIconButton(
+                      borderColor: AppColors.textColor,
+                      child: SvgPicture.asset(
+                        AppIcons.share,
+                        color: Colors.black54,
+                      ))
+                ],
+              ),
             ),
             Expanded(
               child: ListView(

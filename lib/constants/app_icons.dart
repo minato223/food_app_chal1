@@ -7,4 +7,5 @@ class AppIcons {
   static String star = "${_basePath}star.svg";
   static String ticket = "${_basePath}ticket.svg";
   static String timer = "${_basePath}timer.svg";
+  static String home = "${_basePath}home.svg";
 }
