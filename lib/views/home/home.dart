@@ -5,12 +5,17 @@ import 'package:food_app_chal1/constants/app_colors.dart';
 import 'package:food_app_chal1/constants/app_icons.dart';
 import 'package:food_app_chal1/constants/app_images.dart';
 import 'package:food_app_chal1/constants/app_sizes.dart';
+import 'package:food_app_chal1/fixtures/food_fixtures.dart';
+import 'package:food_app_chal1/models/food_model.dart';
+import 'package:food_app_chal1/views/food-detail/food_detail.dart';
 import 'package:food_app_chal1/views/home/widgets/categories.dart';
 import 'package:food_app_chal1/views/home/widgets/presentation.dart';
 import 'package:food_app_chal1/views/home/widgets/search_bar.dart';
+import 'package:food_app_chal1/views/merchant-detail/merchant_detail.dart';
 import 'package:food_app_chal1/widgets/app_grid_view.dart';
 import 'package:food_app_chal1/widgets/app_icon.dart';
 import 'package:food_app_chal1/widgets/xspace.dart';
+import 'package:food_app_chal1/tools/extensions/context_ext.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -81,10 +86,15 @@ class _HomeState extends State<Home> {
                 Text("Recommended",
                     style: theme.textTheme.titleMedium!
                         .copyWith(fontWeight: FontWeight.w900)),
-                Text("View all",
-                    style: theme.textTheme.titleSmall!.copyWith(
-                        fontWeight: FontWeight.w900,
-                        color: AppColors.greenColor))
+                InkWell(
+                  onTap: () {
+                    context.pushRoute(const MerchantDetail());
+                  },
+                  child: Text("View all",
+                      style: theme.textTheme.titleSmall!.copyWith(
+                          fontWeight: FontWeight.w900,
+                          color: AppColors.greenColor)),
+                )
               ],
             ),
           ),
@@ -94,28 +104,34 @@ class _HomeState extends State<Home> {
               crossAxisSpacing: size.CONTENT_SPACE,
               mainAxisSpacing: size.CONTENT_SPACE * 1.5,
               padding: EdgeInsets.symmetric(horizontal: size.CONTENT_SPACE),
-              children: List.generate(
-                  5,
-                  (index) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: size.WIDTH * .5,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(AppImages.food3))),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(size.CONTENT_SPACE * .6),
-                            child: Text("Spicy chicken Toriyaki",
-                                textAlign: TextAlign.center,
-                                style: theme.textTheme.titleSmall!.copyWith(
-                                    fontWeight: FontWeight.w900, height: 1.5)),
-                          )
-                        ],
-                      ))),
+              children: List.generate(4, (index) {
+                FoodModel food = FoodFixtures.foods[index];
+                return InkWell(
+                  onTap: () {
+                    context.pushRoute(FoodDetail(item: food));
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: size.WIDTH * .5,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(food.image))),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(size.CONTENT_SPACE * .6),
+                        child: Text(food.name,
+                            textAlign: TextAlign.center,
+                            style: theme.textTheme.titleSmall!.copyWith(
+                                fontWeight: FontWeight.w900, height: 1.5)),
+                      )
+                    ],
+                  ),
+                );
+              }))
         ],
       ),
       bottomNavigationBar: Container(

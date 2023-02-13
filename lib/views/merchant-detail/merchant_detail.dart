@@ -4,8 +4,9 @@ import 'package:food_app_chal1/constants/app_colors.dart';
 import 'package:food_app_chal1/constants/app_icons.dart';
 import 'package:food_app_chal1/constants/app_images.dart';
 import 'package:food_app_chal1/constants/app_sizes.dart';
+import 'package:food_app_chal1/fixtures/food_fixtures.dart';
 import 'package:food_app_chal1/views/common/custom_app_bar.dart';
-import 'package:food_app_chal1/widgets/app_button.dart';
+import 'package:food_app_chal1/views/merchant-detail/widgets/merchant_food_item.dart';
 import 'package:food_app_chal1/widgets/app_icon.dart';
 import 'package:food_app_chal1/widgets/outlined_icon_button.dart';
 import 'package:food_app_chal1/widgets/xspace.dart';
@@ -29,6 +30,9 @@ class MerchantDetail extends StatelessWidget {
           children: [
             CustomAppBar(
               leading: OutlinedIconButton(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   borderColor: AppColors.textColor,
                   child: SvgPicture.asset(
                     AppIcons.arrowLeft,
@@ -178,126 +182,9 @@ class MerchantDetail extends StatelessWidget {
                     ],
                   ),
                   XSpace(size.CONTENT_SPACE).y,
-                  ...List.generate(5, (index) {
-                    return Container(
-                      padding: EdgeInsets.all(size.CONTENT_SPACE * .5),
-                      margin: EdgeInsets.only(bottom: size.CONTENT_SPACE),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              offset: Offset(5, 5),
-                              blurRadius: 10,
-                              spreadRadius: 1,
-                            )
-                          ]),
-                      child: Column(
-                        children: [
-                          IntrinsicHeight(
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: size.WIDTH * .2,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      image: DecorationImage(
-                                          image: AssetImage(AppImages.food6),
-                                          fit: BoxFit.cover)),
-                                ),
-                                XSpace(size.CONTENT_SPACE).x,
-                                Expanded(
-                                    child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: size.CONTENT_SPACE / 2),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Spicy Chiken Teriyaki',
-                                          style: theme.textTheme.titleMedium!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w900)),
-                                      XSpace(size.CONTENT_SPACE * .8).y,
-                                      Text(
-                                          'Spicy Chiken Teriyaki Proident magna ullamco laboris nisi.',
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: theme.textTheme.titleSmall!
-                                              .copyWith(
-                                                  color: AppColors.textColor,
-                                                  fontWeight: FontWeight.w800)),
-                                      XSpace(size.CONTENT_SPACE * .8).y,
-                                      Row(
-                                        children: [
-                                          RichText(
-                                            text: TextSpan(
-                                              style:
-                                                  theme.textTheme.titleMedium,
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                    text: '\$9.12 ',
-                                                    style: theme
-                                                        .textTheme.titleSmall!
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w900)),
-                                                TextSpan(
-                                                    text: ' \$0.02',
-                                                    style: theme
-                                                        .textTheme.titleSmall!
-                                                        .copyWith(
-                                                            decoration:
-                                                                TextDecoration
-                                                                    .lineThrough,
-                                                            color: AppColors
-                                                                .textColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal:
-                                                    size.CONTENT_SPACE * .2),
-                                            child: Text(
-                                              "|",
-                                              style: TextStyle(
-                                                  color: AppColors.textColor),
-                                            ),
-                                          ),
-                                          Expanded(
-                                              flex: 1,
-                                              child: Text('Can be customized',
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: theme
-                                                      .textTheme.titleSmall!
-                                                      .copyWith(
-                                                          color: AppColors
-                                                              .greenColor,
-                                                          fontWeight: FontWeight
-                                                              .w800))),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )),
-                              ],
-                            ),
-                          ),
-                          XSpace(size.CONTENT_SPACE).y,
-                          AppButton(
-                            text: "Add to cart",
-                          )
-                        ],
-                      ),
-                    );
-                  }).toList()
+                  ...FoodFixtures.foods
+                      .map((e) => MerchantFoodItem(item: e))
+                      .toList()
                 ],
               ),
             ),
