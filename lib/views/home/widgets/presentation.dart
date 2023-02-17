@@ -1,10 +1,57 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:food_app_chal1/constants/app_icons.dart';
 import 'package:food_app_chal1/constants/app_images.dart';
 import 'package:food_app_chal1/constants/app_sizes.dart';
 import 'package:food_app_chal1/widgets/xspace.dart';
 
-class Presentation extends StatelessWidget {
+class Presentation extends StatefulWidget {
   const Presentation({super.key});
+
+  @override
+  State<Presentation> createState() => _PresentationState();
+}
+
+class _PresentationState extends State<Presentation> {
+  late final Timer timer;
+  final Duration duration = const Duration(milliseconds: 600);
+
+  final images = [
+    AppImages.food10,
+    AppImages.food12,
+    AppImages.food3,
+  ];
+
+  final texts = [
+    "Good price for\nyour breakfast !",
+    "Apolo chicken\nPak Sugar",
+    "Bean-Centered\nDishes",
+  ];
+
+  int _index = 0;
+  List<String> iconList = [
+    AppIcons.home,
+    AppIcons.copyLink,
+    AppIcons.star,
+    AppIcons.ticket,
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      if (mounted) {
+        setState(() => _index++);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +61,21 @@ class Presentation extends StatelessWidget {
       margin: EdgeInsets.symmetric(
           vertical: size.CONTENT_SPACE / 2, horizontal: size.CONTENT_SPACE),
       height: size.WIDTH * .4,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(AppImages.food2), fit: BoxFit.cover),
-          borderRadius: BorderRadius.circular(10)),
       child: Stack(
         children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: AnimatedSwitcher(
+              duration: duration,
+              child: Image.asset(
+                images[_index % images.length],
+                fit: BoxFit.cover,
+                height: size.WIDTH * .4,
+                key: UniqueKey(),
+                width: double.infinity,
+              ),
+            ),
+          ),
           Positioned(
             top: 0,
             left: 0,
@@ -50,15 +106,32 @@ class Presentation extends StatelessWidget {
                 Expanded(
                   flex: 4,
                   child: FittedBox(
-                    child: Text(
-                      "Good price for\nyour breakfast !".toUpperCase(),
-                      style: theme.textTheme.headline5!.copyWith(
-                          height: 1.4,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    child: AnimatedSwitcher(
+                        duration: duration,
+                        transitionBuilder: (child, animation) {
+                          return SlideTransition(
+                            position: Tween<Offset>(
+                                    begin: const Offset(-1, 0),
+                                    end: Offset.zero)
+                                .chain(CurveTween(curve: Curves.easeOutCirc))
+                                .animate(animation),
+                            child: AnimatedOpacity(
+                              opacity: (-1 + animation.value) * (-1),
+                              duration: duration,
+                              child: child,
+                            ),
+                          );
+                        },
+                        child: Text(
+                          texts[_index % texts.length].toUpperCase(),
+                          style: theme.textTheme.headline5!.copyWith(
+                              height: 1.4,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          key: UniqueKey(),
+                        )),
                   ),
                 ),
                 Expanded(
@@ -88,11 +161,12 @@ class Presentation extends StatelessWidget {
             alignment: const Alignment(0, .9),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(3, (index) {
+              children: List.generate(images.length, (index) {
                 double ratio = 8;
-                bool active = index == 0;
+                bool active = index == _index % images.length;
 
-                return Container(
+                return AnimatedContainer(
+                  duration: duration,
                   margin: EdgeInsets.symmetric(horizontal: ratio / 3),
                   height: ratio,
                   width: ratio * (active ? 3 : 1),

@@ -24,6 +24,9 @@ class Cart extends StatelessWidget {
           children: [
             CustomAppBar(
               leading: OutlinedIconButton(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   borderColor: AppColors.textColor,
                   child: SvgPicture.asset(
                     AppIcons.arrowLeft,

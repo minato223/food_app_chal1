@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^1.1.6
   dotted_line: ^3.1.0
+  provider:
 
 dev_dependencies:
   flutter_test:
@@ -30,8 +31,25 @@ flutter:
   fonts:
     - family: Comfortaa
       fonts:
-        - asset: assets/fonts/Comfortaa-Bold.ttf
-        - asset: assets/fonts/Comfortaa-Light.ttf
-        - asset: assets/fonts/Comfortaa-Medium.ttf
-        - asset: assets/fonts/Comfortaa-Regular.ttf
-        - asset: assets/fonts/Comfortaa-SemiBold.ttf
+        - asset: assets/fonts/Comfortaa/Comfortaa-Bold.ttf
+        - asset: assets/fonts/Comfortaa/Comfortaa-Light.ttf
+        - asset: assets/fonts/Comfortaa/Comfortaa-Medium.ttf
+        - asset: assets/fonts/Comfortaa/Comfortaa-Regular.ttf
+        - asset: assets/fonts/Comfortaa/Comfortaa-SemiBold.ttf
+    - family: CrimsonPro
+      fonts:
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-Black.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-BlackItalic.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-Bold.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-BoldItalic.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-ExtraBold.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-ExtraBoldItalic.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-ExtraLight.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-ExtraLightItalic.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-Italic.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-Light.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-Medium.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-MediumItalic.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-Regular.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-SemiBold.ttf
+        - asset: assets/fonts/CrimsonPro/CrimsonPro-SemiBoldItalic.ttf

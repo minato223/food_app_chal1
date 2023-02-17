@@ -34,12 +34,23 @@ class MerchantFoodItem extends StatelessWidget {
           IntrinsicHeight(
             child: Row(
               children: [
-                Container(
+                SizedBox(
                   width: size.WIDTH * .2,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: AssetImage(item.image), fit: BoxFit.cover)),
+                  child: TweenAnimationBuilder(
+                    tween: Tween<double>(begin: .4, end: 1),
+                    duration: const Duration(milliseconds: 600),
+                    builder: (context, value, child) {
+                      return Transform.scale(
+                          scale: value,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                    image: AssetImage(item.image),
+                                    fit: BoxFit.cover)),
+                          ));
+                    },
+                  ),
                 ),
                 XSpace(size.CONTENT_SPACE).x,
                 Expanded(

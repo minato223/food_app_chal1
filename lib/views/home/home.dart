@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:food_app_chal1/constants/app_colors.dart';
 import 'package:food_app_chal1/constants/app_icons.dart';
@@ -7,6 +9,7 @@ import 'package:food_app_chal1/constants/app_images.dart';
 import 'package:food_app_chal1/constants/app_sizes.dart';
 import 'package:food_app_chal1/fixtures/food_fixtures.dart';
 import 'package:food_app_chal1/models/food_model.dart';
+import 'package:food_app_chal1/views/cart/cart.dart';
 import 'package:food_app_chal1/views/food-detail/food_detail.dart';
 import 'package:food_app_chal1/views/home/widgets/categories.dart';
 import 'package:food_app_chal1/views/home/widgets/presentation.dart';
@@ -32,6 +35,7 @@ class _HomeState extends State<Home> {
     AppIcons.star,
     AppIcons.ticket,
   ];
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -144,9 +148,13 @@ class _HomeState extends State<Home> {
                 .entries
                 .map((entry) => InkWell(
                       onTap: () {
-                        setState(() {
-                          _currentIndex = entry.key;
-                        });
+                        if (_currentIndex == (iconList.length - 1)) {
+                          context.pushRoute(const Cart());
+                        } else {
+                          setState(() {
+                            _currentIndex = entry.key;
+                          });
+                        }
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
