@@ -1,7 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:food_app_chal1/constants/app_colors.dart';
 import 'package:food_app_chal1/constants/app_icons.dart';
@@ -33,7 +31,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
-  double startDuration = 300;
+  double startDuration = 200;
   List<String> iconList = [
     AppIcons.pentagone,
     AppIcons.wallet,
@@ -178,7 +176,7 @@ class _HomeState extends State<Home> {
                   children: List.generate(4, (index) {
                     FoodModel food = FoodFixtures.foods[index];
                     double bottomOffset = size.CONTENT_SPACE * 4;
-                    int duration = 500;
+                    int duration = 300;
                     return TweenAnimationBuilder(
                         curve: Curves.decelerate,
                         tween: Tween<double>(begin: 0, end: 1),

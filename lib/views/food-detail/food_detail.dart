@@ -10,12 +10,15 @@ import 'package:food_app_chal1/constants/app_icons.dart';
 import 'package:food_app_chal1/constants/app_images.dart';
 import 'package:food_app_chal1/constants/app_sizes.dart';
 import 'package:food_app_chal1/fixtures/food_fixtures.dart';
+import 'package:food_app_chal1/models/cart_model.dart';
 import 'package:food_app_chal1/models/food_menu_model.dart';
 import 'package:food_app_chal1/models/food_model.dart';
+import 'package:food_app_chal1/providers/cart_provider.dart';
 import 'package:food_app_chal1/views/common/bottom_action_sheet.dart';
 import 'package:food_app_chal1/views/common/change_quantity_widget.dart';
 import 'package:food_app_chal1/widgets/outlined_icon_button.dart';
 import 'package:food_app_chal1/widgets/xspace.dart';
+import 'package:provider/provider.dart';
 
 class FoodDetail extends StatefulWidget {
   FoodModel item;
@@ -29,16 +32,19 @@ class _FoodDetailState extends State<FoodDetail> with TickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<double> scaleAnimation;
   late Animation<Color?> colorAnimation;
+  late CartProvider cartProvider;
   late final Timer timer;
   int _index = 0;
+  int quantity = 1;
   final Duration duration = const Duration(milliseconds: 600);
   final images = [
     AppImages.food2,
     AppImages.food3,
-    AppImages.food4,
   ];
   @override
   void initState() {
+    cartProvider = Provider.of<CartProvider>(context, listen: false);
+    images.add(widget.item.image);
     timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       if (mounted) {
         setState(() => _index++);
@@ -64,6 +70,21 @@ class _FoodDetailState extends State<FoodDetail> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  double getTotalAmount() {
+    double sup = 0;
+    var currentMenus = additionalMenu
+        .where((element) => element['state'])
+        .map((e) => e['item'])
+        .toList();
+    if (currentMenus.isNotEmpty) {
+      sup = currentMenus
+          .map((e) => e.price)
+          .toList()
+          .reduce((value, element) => value + element);
+    }
+    return (quantity * widget.item.price) + sup;
+  }
+
   List<Map<String, dynamic>> additionalMenu =
       FoodFixtures.foodMenuList.map((e) {
     Map<String, dynamic> menu = {};
@@ -87,6 +108,19 @@ class _FoodDetailState extends State<FoodDetail> with TickerProviderStateMixin {
   }
 
   addItemToCart() {
+    var foodMenus = additionalMenu
+        .where((element) => element['state'])
+        .map((e) => e['item'])
+        .toList();
+    List<FoodMenuModel> menus = [];
+    for (var element in foodMenus) {
+      if (element is FoodMenuModel) {
+        menus.add(element);
+      }
+    }
+    CartModel cartModel =
+        CartModel(food: widget.item, quantity: quantity, menus: menus);
+    cartProvider.addToCart(cartModel);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
         "Item added to cart",
@@ -314,11 +348,18 @@ class _FoodDetailState extends State<FoodDetail> with TickerProviderStateMixin {
                       Text('Order Quantity',
                           style: theme.textTheme.titleSmall!
                               .copyWith(fontWeight: FontWeight.w900)),
-                      ChangeQuantity()
+                      ChangeQuantity(
+                        onChange: (value) {
+                          setState(() {
+                            quantity = value;
+                          });
+                        },
+                      )
                     ],
                   ),
                 ),
                 BottomActionSheet(
+                  subtitle: "\$${getTotalAmount()}",
                   onClick: addItemToCart,
                 ),
               ],
@@ -328,86 +369,4 @@ class _FoodDetailState extends State<FoodDetail> with TickerProviderStateMixin {
       ),
     );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   ThemeData theme = Theme.of(context);
-  //   AppSizes size = AppSizes(context);
-
-  //   return Scaffold(
-  //     body: Column(
-  //       children: [
-  //         Container(
-  //           height: size.HEIGHT * .4,
-  //           width: size.WIDTH,
-  //           padding: EdgeInsets.all(size.CONTENT_SPACE),
-  //           decoration: BoxDecoration(
-  //               image: DecorationImage(
-  //                   image: AssetImage(widget.item.image), fit: BoxFit.cover)),
-  //           child: Stack(children: [
-  //             Align(
-  //               alignment: const Alignment(-1, -.8),
-  //               child: OutlinedIconButton(
-  //                   onTap: () {
-  //                     Navigator.pop(context);
-  //                   },
-  //                   child: SvgPicture.asset(
-  //                     AppIcons.arrowLeft,
-  //                     color: Colors.white,
-  //                   )),
-  //             ),
-  //             Align(
-  //               alignment: Alignment.bottomCenter,
-  //               child: Row(
-  //                 mainAxisAlignment: MainAxisAlignment.center,
-  //                 children: List.generate(3, (index) {
-  //                   return Container(
-  //                     width: size.CONTENT_SPACE * 2.5,
-  //                     height: 4,
-  //                     margin: EdgeInsets.symmetric(
-  //                         horizontal: size.CONTENT_SPACE * .3),
-  //                     decoration: BoxDecoration(
-  //                         // borderRadius: BorderRadius.circular(2),
-  //                         color: index == 0 ? Colors.white : Colors.white38),
-  //                   );
-  //                 }),
-  //               ),
-  //             )
-  //           ]),
-  //         ),
-  //   Expanded(
-  //       child: ListView(
-  //     padding: EdgeInsets.all(size.CONTENT_SPACE),
-  //     physics: const BouncingScrollPhysics(),
-  //     children: [
-
-  //     ],
-  //   )),
-  //   SizedBox(
-  //     child: Column(
-  //       children: [
-  //         Container(
-  //           padding: EdgeInsets.all(size.CONTENT_SPACE),
-  //           color: Colors.blueGrey[50],
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             crossAxisAlignment: CrossAxisAlignment.center,
-  //             children: [
-  //               Text('Order Quantity',
-  //                   style: theme.textTheme.titleSmall!
-  //                       .copyWith(fontWeight: FontWeight.w900)),
-  //               ChangeQuantity()
-  //             ],
-  //           ),
-  //         ),
-  //         BottomActionSheet(
-  //           onClick: addItemToCart,
-  //         ),
-  //       ],
-  //     ),
-  //   ),
-  // ],
-  //     ),
-  //   );
-  // }
 }

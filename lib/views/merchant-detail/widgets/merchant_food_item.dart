@@ -3,9 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:food_app_chal1/constants/app_colors.dart';
 import 'package:food_app_chal1/constants/app_sizes.dart';
+import 'package:food_app_chal1/models/cart_model.dart';
 import 'package:food_app_chal1/models/food_model.dart';
+import 'package:food_app_chal1/providers/cart_provider.dart';
 import 'package:food_app_chal1/widgets/app_button.dart';
 import 'package:food_app_chal1/widgets/xspace.dart';
+import 'package:provider/provider.dart';
 
 class MerchantFoodItem extends StatelessWidget {
   FoodModel item;
@@ -123,6 +126,18 @@ class MerchantFoodItem extends StatelessWidget {
                   ),
                   XSpace(size.CONTENT_SPACE).y,
                   AppButton(
+                    onTap: () {
+                      var model = CartModel(food: item, quantity: 1);
+                      Provider.of<CartProvider>(context, listen: false)
+                          .addToCart(model);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                          "Item added to cart",
+                          style: TextStyle(color: AppColors.greenColor),
+                        ),
+                        backgroundColor: Colors.white,
+                      ));
+                    },
                     text: "Add to cart",
                   )
                 ],

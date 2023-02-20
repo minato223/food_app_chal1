@@ -1,10 +1,13 @@
+import 'dart:math';
+
 import 'package:food_app_chal1/constants/app_images.dart';
 import 'package:food_app_chal1/models/food_menu_model.dart';
 import 'package:food_app_chal1/models/food_model.dart';
 
 class FoodFixtures {
   static List<double> get _prices {
-    return [3, 4];
+    double price = Random().nextInt(100) + 50;
+    return [price, (price * .9)];
   }
 
   static List<FoodModel> get foods => [

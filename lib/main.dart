@@ -12,13 +12,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "Comfortaa"),
-      home: MultiProvider(
-        providers: [ChangeNotifierProvider(create: (_) => CartProvider())],
-        child: const Home(),
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (create) => CartProvider())],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "Comfortaa"),
+        home: const Home(),
       ),
     );
   }
