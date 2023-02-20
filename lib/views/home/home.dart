@@ -104,15 +104,23 @@ class _HomeState extends State<Home> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  "Your location",
-                  style: theme.textTheme.titleSmall!
-                      .copyWith(color: AppColors.textColor),
+                FadeSlideAnimation(
+                  direction: FadeAnimationDirection.top,
+                  duration: getDuration(.2),
+                  child: Text(
+                    "Your location",
+                    style: theme.textTheme.titleSmall!
+                        .copyWith(color: AppColors.textColor),
+                  ),
                 ),
-                Text(
-                  "Minato Namikaze, Konohagakure",
-                  style: theme.textTheme.titleMedium!
-                      .copyWith(fontWeight: FontWeight.w600),
+                FadeSlideAnimation(
+                  direction: FadeAnimationDirection.top,
+                  duration: getDuration(.7),
+                  child: Text(
+                    "Minato Namikaze, Konohagakure",
+                    style: theme.textTheme.titleMedium!
+                        .copyWith(fontWeight: FontWeight.w600),
+                  ),
                 ),
               ],
             )),

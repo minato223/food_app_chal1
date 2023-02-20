@@ -310,7 +310,7 @@ class Cart extends StatelessWidget {
                               ),
                             ),
                             BottomActionSheet(
-                              subtitle: "\$$total",
+                              subtitle: "\$${total.toStringAsExponential(2)}",
                               onClick: () {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
