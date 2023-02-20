@@ -225,7 +225,7 @@ class _FoodDetailState extends State<FoodDetail> with TickerProviderStateMixin {
                                               fontWeight: FontWeight.w900)),
                                   XSpace(size.CONTENT_SPACE * .8).y,
                                   Text(
-                                      '\$${widget.item.price.toStringAsExponential(2)}',
+                                      '\$${widget.item.price.toStringAsFixed(2)}',
                                       style: theme.textTheme.titleMedium!
                                           .copyWith(
                                               color: AppColors.greenColor,
@@ -288,7 +288,7 @@ class _FoodDetailState extends State<FoodDetail> with TickerProviderStateMixin {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                        '\$${e["item"].price.toStringAsExponential(2)}',
+                                        '\$${e["item"].price.toStringAsFixed(2)}',
                                         style: theme.textTheme.titleSmall!
                                             .copyWith(
                                                 color: Colors.black38,
@@ -361,7 +361,7 @@ class _FoodDetailState extends State<FoodDetail> with TickerProviderStateMixin {
                   ),
                 ),
                 BottomActionSheet(
-                  subtitle: "\$${getTotalAmount().toStringAsExponential(2)}",
+                  subtitle: "\$${getTotalAmount().toStringAsFixed(2)}",
                   onClick: addItemToCart,
                 ),
               ],

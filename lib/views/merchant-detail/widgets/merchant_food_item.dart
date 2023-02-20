@@ -82,14 +82,14 @@ class MerchantFoodItem extends StatelessWidget {
                                       children: <TextSpan>[
                                         TextSpan(
                                             text:
-                                                '\$${item.price.toStringAsExponential(2)} ',
+                                                '\$${item.price.toStringAsFixed(2)} ',
                                             style: theme.textTheme.titleSmall!
                                                 .copyWith(
                                                     fontWeight:
                                                         FontWeight.w900)),
                                         TextSpan(
                                             text:
-                                                ' \$${item.promotionPrice.toStringAsExponential(2)}',
+                                                ' \$${item.promotionPrice.toStringAsFixed(2)}',
                                             style: theme.textTheme.titleSmall!
                                                 .copyWith(
                                                     decoration: TextDecoration
