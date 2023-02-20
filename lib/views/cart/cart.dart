@@ -187,12 +187,12 @@ class Cart extends StatelessWidget {
                                                                           TextSpan>[
                                                                         TextSpan(
                                                                             text:
-                                                                                "\$${cartModel.food.price}",
+                                                                                "\$${cartModel.food.price.toString()}",
                                                                             style:
                                                                                 theme.textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w900)),
                                                                         TextSpan(
                                                                             text:
-                                                                                ' \$${cartModel.food.promotionPrice}',
+                                                                                ' \$${cartModel.food.promotionPrice.toStringAsFixed(2)}',
                                                                             style: theme.textTheme.titleSmall!.copyWith(
                                                                                 decoration: TextDecoration.lineThrough,
                                                                                 color: AppColors.textColor,
