@@ -20,7 +20,7 @@ class OutlinedIconButton extends StatelessWidget {
     return Builder(builder: (context) {
       AppSizes size = AppSizes(context);
       double r = ratio ?? size.CONTENT_SPACE * 2.3;
-      return InkWell(
+      return GestureDetector(
         onTap: onTap,
         child: Container(
           height: r,

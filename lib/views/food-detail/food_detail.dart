@@ -137,6 +137,7 @@ class _FoodDetailState extends State<FoodDetail> with TickerProviderStateMixin {
                           duration: duration,
                           child: Image.asset(
                             images[_index % images.length],
+                            height: size.HEIGHT * .35,
                             fit: BoxFit.fill,
                             key: UniqueKey(),
                             width: double.infinity,

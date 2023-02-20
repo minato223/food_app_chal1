@@ -8,4 +8,8 @@ class AppIcons {
   static String ticket = "${_basePath}ticket.svg";
   static String timer = "${_basePath}timer.svg";
   static String home = "${_basePath}home.svg";
+  static String pentagone = "${_basePath}pentagone.svg";
+  static String heart = "${_basePath}heart.svg";
+  static String wallet = "${_basePath}wallet.svg";
+  static String cart = "${_basePath}cart.svg";
 }
