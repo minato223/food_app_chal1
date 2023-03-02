@@ -1,16 +1,10 @@
-# food_app_chal1
+# Food App Challenge 1
 
-A new Flutter project.
+Conception de l'interface utilisateur de l'application de commande de nourriture dans Flutter ❤️
 
-## Getting Started
+Si vous avez aimé, veuillez montrer votre appréciation en donnant une étoile sur le référentiel GitHub 🚀.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### 🔥 Code source : https://github.com/minato223/food_app_chal1
+#### ⛹️ UI Link: https://dribbble.com/shots/18925334-Warmak-Food-Delivery-App
+#### 👨‍💻 Contact for work: https://www.linkedin.com/in/lamine-diarra-a46504196/
+![Food Image](https://cdn.dribbble.com/users/8560571/screenshots/18925334/media/2767218950c5d1d2c5631428af7e725d.png)
